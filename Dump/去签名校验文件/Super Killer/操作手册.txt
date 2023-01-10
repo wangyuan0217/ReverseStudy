@@ -1,0 +1,14 @@
+
+
+xml文件主入口替换为
+top.hooksign.HookApplication
+
+dex文件
+
+top.hooksign.HookApplication类里面
+
+2 32 69行
+
+入口替换为原软件主入口
+
+

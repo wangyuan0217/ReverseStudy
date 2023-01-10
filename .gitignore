@@ -1,0 +1,15 @@
+
+/fridaUiTools/logs/
+/fridaUiTools/FRIDA_DEXDump/
+/fridaUiTools/tmp/
+
+
+/Dump/unpacker/uploads
+
+
+
+*.log
+*.pcap
+
+
+*.cache

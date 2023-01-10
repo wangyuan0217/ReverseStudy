@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="red">#FF0000</color>
+    <color name="red2">#C4DF4F4F</color>
+    <color name="redshow">#EC1919</color>
+    <color name="yellow">#CAED02</color>
+    <color name="yellow2">#D0BBD811</color>
+    <color name="mycard">#FFFFFF</color>
+    <color name="white2">#9ECACACA</color>
+    <color name="whiteshaow">#9ECFCFCF</color>
+    <color name="wh">#9E6E6E6E</color>
+    <color name="trance">#00FFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="shadow">#BAC3C3C3</color>
+    <color name="text_color">#000000</color>
+    <color name="hblue">#0B0ECD</color>
+    <color name="blue">#1E90FF</color>
+</resources>

@@ -1,0 +1,35 @@
+梆梆加固免费版重制版脱修教程 
+
+应用加固时间：2022.05.03
+
+教程编写时间：2022.05.03
+
+大家好，我是阿力
+
+本期视频给各位录了一个梆梆加固重制版脱修教程
+
+所需工具：MT管理器、云注入
+其他脱壳工具都可以，只要你会分析dex就行
+
+欢迎加入粉丝交流群：662161008​
+视频内工具进群查看公告总链接即可获取噢！
+
+本期视频要替换的加固入口
+
+入口：com.SecShell.SecShell.AW
+
+xml文件要删的入口代码（代码位置在文件最下面）
+    <provider
+            android:name="com.SecShell.SecShell.CP"
+            android:exported="false"
+            android:authorities="com.fiakaifashouce.CP"
+            android:initOrder="2147483647" />
+
+要删的加固残留文件
+assets/meta-data文件夹
+assets/classes0.jar
+lib/armeabi/libSecShell.so
+lib/armeabi/libSecShell-x86.so
+
+下面开始教程
+先看看加固前与未加固前的样子

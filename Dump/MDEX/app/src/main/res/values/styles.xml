@@ -1,0 +1,51 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:alertDialogTheme">@style/MyDialogStyle</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
+    </style>
+
+    <style name="OverflowMenuStyle" parent="@style/Widget.AppCompat.PopupMenu.Overflow">
+        <!-- 修改竖直方向上与屏幕顶端的距离为50dp -->
+        <item name="android:dropDownVerticalOffset">40dp</item>
+        <!-- 修改水平方向上与屏幕右端的距离为10dp -->
+        <item name="android:dropDownHorizontalOffset">10dp</item>
+    </style>
+
+    <!--设置透明背景冷启动解决方案-->
+    <style name="Appwelcome" parent="android:Theme.Translucent.NoTitleBar.Fullscreen" />
+
+    <style name="AppWelcome" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/activity_welcome_welcome_pic</item>
+    </style>
+
+
+    <style name="MyDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!--是否浮在窗口之上-->
+        <!--<item name="android:windowIsFloating">true</item>-->
+        <!--半透明-->
+        <!--<item name="android:windowIsTranslucent">true</item>-->
+        <!--是否显示title-->
+        <item name="android:windowNoTitle">true</item>
+        <!--dialog之外没有焦点的区域是否罩上黑色半透明-->
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/wh</item>
+        <item name="android:textSize">16sp</item>
+        <!-- 这里是修改顶部标题背景颜色，具体颜色自己定，可以是图片 -->
+        <item name="android:topDark">@color/redshow</item>
+        <!-- 这里是修改内容区域背景颜色 -->
+        <item name="android:layout_gravity">center</item>
+        <item name="buttonBarButtonStyle">@color/white</item>
+    </style>
+
+
+</resources>

@@ -1,0 +1,11 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:opacity="opaque">
+    <!-- The background color, preferably the same as your normal theme -->
+    <item android:drawable="@android:color/white" />
+    <!-- Your product logo - 144dp color version of your app icon -->
+    <item>
+        <bitmap
+            android:gravity="fill"
+            android:src="@drawable/activity_welcome_welcome_pic" />
+    </item>
+</layer-list>
