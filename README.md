@@ -25,6 +25,6 @@
 ### clone
 
 `
-git clone https://github.com/WaxMoon/MultiApp.git
+git clone https://github.com/wangyuan0217/ReverseStudy
 git submodule update --init
 `
