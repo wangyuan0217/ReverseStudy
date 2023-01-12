@@ -24,7 +24,6 @@
 
 ### clone
 
-`
-git clone https://github.com/wangyuan0217/ReverseStudy
-git submodule update --init
-`
+`git clone https://github.com/wangyuan0217/ReverseStudy`
+
+`git submodule update --init`
