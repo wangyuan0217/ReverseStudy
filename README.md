@@ -21,3 +21,10 @@
 
 ####  [start](start.md) 
 
+
+### clone
+
+`
+git clone https://github.com/WaxMoon/MultiApp.git
+git submodule update --init
+`
