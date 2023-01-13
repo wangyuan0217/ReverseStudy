@@ -8,7 +8,6 @@
 
 
 
-
 ## lamda
 
 adb shell
@@ -23,11 +22,8 @@ sh x86_64.sh
 * 注意，设备IP 必须在参数第一位
 python -u startmitm.py 192.168.1.2
 
-
-
 * 这里的 com.some.package 是应用的 ID
 python -u startmitm.py 192.168.1.2:com.some.package
-
 
 
 
@@ -36,3 +32,4 @@ python -u startmitm.py 192.168.1.2:com.some.package
 过签 360 (so是指加固的壳的so，也就是app第一个加载的so)
 
 apktweak --embed --apk xxxx.apk --target assets/libjiagu.so
+
