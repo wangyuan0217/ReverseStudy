@@ -31,3 +31,8 @@ python -u startmitm.py 192.168.1.2:com.some.package
 
 
 
+## TweakMe
+
+过签 360 (so是指加固的壳的so，也就是app第一个加载的so)
+
+apktweak --embed --apk xxxx.apk --target assets/libjiagu.so
