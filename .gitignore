@@ -13,3 +13,8 @@
 
 
 *.cache
+/.idea
+/.idea/
+/.idea/vcs.xml
+
+
