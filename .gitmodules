@@ -9,3 +9,16 @@
 [submodule "frida_trump"]
 	path = Frida/frida_trump
 	url = https://github.com/wangyuan0217/frida_trump.git
+
+[submodule "fridaUiTools"]
+	path = Frida/fridaUiTools
+	url = https://github.com/dqzg12300/fridaUiTools.git
+
+[submodule "lamda"]
+	path = lamda
+	url = https://github.com/rev1si0n/lamda.git
+
+[submodule "TweakMe"]
+	path = TweakMe
+	url = https://github.com/liaoguobao/TweakMe.git
+
