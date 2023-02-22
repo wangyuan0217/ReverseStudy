@@ -22,3 +22,6 @@
 	path = TweakMe
 	url = https://github.com/liaoguobao/TweakMe.git
 
+[submodule "unidbg_trump"]
+	path = unidbg_trump
+	url = https://github.com/wangyuan0217/unidbg_trump.git
