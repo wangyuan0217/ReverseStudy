@@ -146,19 +146,33 @@ class AxmlParser(object):
         while self.__index < file_size:
             tag_chunk = self.__get_4_bytes()
 
-            match tag_chunk:
-                case 0x00100100:
-                    self.__ns_index_finger = self.__process_start_namespace_chunk(current_node)
-                case 0x00100101:
-                    self.__process_end_namespace_chunk(current_node)
-                case 0x00100102:
-                    current_node =self.__process_start_tag_chunk(current_node)
-                case 0x00100103:
-                    current_node =self.__process_end_tag_chunk(current_node).Parent
-                case 0x00100104:
-                    self.__process_text_chunk()
-                case _:
-                    raise Exception("Invalid tag chunk value.")
+            if tag_chunk == 0x00100100:
+                self.__ns_index_finger = self.__process_start_namespace_chunk(current_node)
+            elif tag_chunk == 0x00100101:
+                self.__process_end_namespace_chunk(current_node)
+            elif tag_chunk == 0x00100102:
+                current_node =self.__process_start_tag_chunk(current_node)
+            elif tag_chunk == 0x00100103:
+                current_node =self.__process_end_tag_chunk(current_node).Parent
+            elif tag_chunk == 0x00100104:
+                self.__process_text_chunk()
+            else:
+                raise Exception("Invalid tag chunk value.")
+
+            # py 3.10+
+            # match tag_chunk:
+            #     case 0x00100100:
+            #         self.__ns_index_finger = self.__process_start_namespace_chunk(current_node)
+            #     case 0x00100101:
+            #         self.__process_end_namespace_chunk(current_node)
+            #     case 0x00100102:
+            #         current_node =self.__process_start_tag_chunk(current_node)
+            #     case 0x00100103:
+            #         current_node =self.__process_end_tag_chunk(current_node).Parent
+            #     case 0x00100104:
+            #         self.__process_text_chunk()
+            #     case _:
+            #         raise Exception("Invalid tag chunk value.")
 
         self.__recursive_get_xml_from_treenode(self.__root, 0)
         return '\n'.join(self.__xml_list)
@@ -304,7 +318,7 @@ class AxmlParser(object):
         raise Exception("Incorrect type id.")
 
 def main():
-    p = AxmlParser("/Users/admin/Downloads/AndroidManifest.xml")
+    p = AxmlParser("D:\Project\Python\PyTest\AndroidManifest.xml")
     axml = p.Deserialize()
     with open("AndroidManifest-Clean.xml","w",encoding="utf-8") as f:
         f.writelines(axml)
