@@ -7,6 +7,8 @@
 
 - [Tools](Tools/README.md) 
 
+- [JS逆向](Js/README.md)
+
 - [Frida脚本](https://github.com/wangyuan0217/frida_trump)
 
 - [fridaUiTools](https://github.com/dqzg12300/fridaUiTools)
