@@ -1,0 +1,52 @@
+
+.isVipColor {color: #d19e1f;font-weight: bold;}
+.isVip, .isVipX {position: relative;}
+.isVip::after {
+    content: '';
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    bottom: -0.3rem;
+    right: -0.4rem;
+    z-index: 2;
+    width: 1.3rem;
+    height: 1.3rem;
+}
+.isVipX::after {
+    content: '';
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    bottom: -0.3rem;
+    right: 0rem;
+    z-index: 2;
+    width: 1.6rem;
+    height: 1.6rem;
+}
+.isVip2X::after {
+    content: '';
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    bottom: -0.3rem;
+    right: 0rem;
+    z-index: 2;
+    width: 1.8rem;
+    height: 1.8rem;
+}
+
+.isVip1::after  {
+    background-image: url("//www.kanxue.com/view/img/member/shenFenBiaoShi/1.png");
+}
+.isVip2::after  {
+    background-image: url("//www.kanxue.com/view/img/member/shenFenBiaoShi/2.png");
+}
+.isVip3::after  {
+    background-image: url("//www.kanxue.com/view/img/member/shenFenBiaoShi/3.png");
+}
+.isVip4::after  {
+    background-image: url("//www.kanxue.com/view/img/member/shenFenBiaoShi/4.png");
+}

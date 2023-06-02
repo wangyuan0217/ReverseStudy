@@ -1,0 +1,163 @@
+/*!
+*    qqLevel.js
+*    https://github.com/BkHumor/qqLevel.js   
+*    (c) 2019/1/30  BkHumor
+*             
+*----------------------------------------------
+*    @func1 qqLevel.getLevel(秒数, 2[可选])     
+*    @param1 总时长秒数。 
+*    @param2 分割时间几小时算一天 默认 2小时
+*    @return 等级 
+*----------------------------------------------
+*    @func2 qqLevel.getImg(level, img_conf)
+*    @param1 等级，上个函数返回的等级   
+*    @param2 图片地址配置
+*    img_conf = [
+*       'http://xxxx.jpg',
+*       'http://xxxx.jpg',
+*       'http://xxxx.jpg',
+*       'http://xxxx.jpg',
+*    ]
+*    @return 等级图片
+*----------------------------------------------
+*    @func3 qqLevel.getDesc(秒数,2[可选])
+*    @param1 总时长秒数。 
+*    @param2 分割时间几小时算一天 默认 2小时
+*    @return 获取文字描述
+*
+*   
+*/
+;(function(root, factory) {
+        
+        if(typeof define === 'function' && define.amd) {
+                
+                define('qqLevel', factory);
+        
+        } else if(typeof exports === 'object') {
+        
+                exports = module.exports = factory();
+        
+        } else {
+        
+                root.qqLevel = factory();
+        
+        }
+
+})( typeof window != "undefined" ? window : this, function() {
+
+        'use strict';
+        var _qqLevel;
+
+        _qqLevel = (function () {
+                var qqLevel = {
+                        getLevel   : x,
+                        getImg     : y,
+                        getImgPlus : z,
+                        getDesc    : v,
+                        getDescBbs : w
+                }
+                var sun, moon, _moon, f, star, king = 0;
+                function x(timestamp, cut) {
+                        //2小时算一天  24小时算一天
+                        cut = cut || 2;
+                        var day = timestamp/cut/3600;
+                        day = day > 36096 ? 36096 : day;
+                        //根据天数算等级
+                        return parseInt(Math.sqrt(day + 4) - 2);
+                }
+                function y(level, img_conf) {
+                        //通过等级得img
+                        img_conf = img_conf || [];
+                        var img_none, img_star, img_moon, img_sun, img_king, result = '';
+                        var arr = [];
+                        if(img_conf.length > 0) {
+                                img_none = '<img src="'+img_conf[0]+'" width="13" height="13" style="opacity: 0.65; margin-right: 2px;">';
+                                img_star = '<img src="'+img_conf[1]+'" width="13" height="13" style="opacity: 0.65; margin-right: 2px;">';
+                                img_moon = '<img src="'+img_conf[2]+'" width="13" height="13" style="opacity: 0.65; margin-right: 2px;">';
+                                img_sun  = '<img src="'+img_conf[3]+'" width="13" height="13" style="opacity: 0.65; margin-right: 2px;">';
+                                img_king = '<img src="'+img_conf[4]+'" width="13" height="13" style="opacity: 0.65; margin-right: 2px;">';
+                        }
+                        if(level < 1) {
+                                return img_none;
+                        }
+                        if(level < 64) {
+                                arr = z(level);
+                                arr.unshift(0);
+                        } else if(level >= 64) {
+                                //皇冠， 太阳， 月亮， 星星个数
+                                king = Math.floor(level/64);
+                                arr = z(level- king*64);
+                                arr.unshift(king);
+                        }
+                        //arr转img
+                       
+                        result += img_king.repeat(arr[0]);
+                        result += img_sun.repeat(arr[1]);
+                        result += img_moon.repeat(arr[2]);
+                        result += img_star.repeat(arr[3]);
+ 
+                        return result;
+                }
+                function z(level) {
+                        
+                        if(level >= 16) {
+                                //太阳，月亮，星星个数
+                                sun = Math.floor(level/16);
+                                _moon = (level - sun * 16)/4;
+                                if(~~_moon !== _moon) {
+                                        f = _moon - Math.floor(_moon);
+                                        star = f * 4;
+                                } else {
+                                        star = 0;
+                                }
+                                moon = Math.floor(_moon);
+                        } else {
+                                sun = 0;
+                                _moon = level/4;
+                                if(~~_moon !== _moon) {
+                                        f = _moon - Math.floor(_moon);
+                                        star = f * 4;
+                                } else {
+                                        star = 0;
+                                }
+                                moon = Math.floor(_moon);
+                        }
+                        var tmparr = [];
+                        tmparr.unshift(star);
+                        tmparr.unshift(moon);
+                        tmparr.unshift(sun);
+                        return tmparr;
+                }
+                function v(timestamp, cut) {
+
+                        cut = cut || 2;
+                        var day = timestamp/cut/3600;
+                        day = day > 36096 ? 36096 : day;
+                        //当前等级
+                        var level = parseInt(Math.sqrt(day + 4) - 2);
+                        //下一级所需小时
+                        var next_total_hour = ~~((Math.pow(level + 1, 2) + 4 * (level + 1) - day) * cut);
+                        //所需总小时数
+                        var str = '在线时长: '+ ~~(timestamp/3600) +' 小时 ( '+level+' 级)<br/> 升级还需要 '+ next_total_hour +' 小时';
+                        return str;
+                }
+                function w(timestamp, cut) {
+
+                        cut = cut || 2;
+                        var day = timestamp/cut/3600;
+                        day = day > 36096 ? 36096 : day;
+                        //当前等级
+                        var level = parseInt(Math.sqrt(day + 4) - 2);
+                        //下一级所需小时
+                        var next_total_hour = ~~((Math.pow(level + 1, 2) + 4 * (level + 1) - day) * cut);
+                        //所需总小时数
+                        var str = ~~(timestamp/3600) +' 小时，  '+level+' 级';
+                        return str;
+                }
+                return qqLevel;
+        })();
+
+        return _qqLevel;
+
+})
+
