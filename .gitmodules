@@ -1,10 +1,3 @@
-[submodule "r0capture"]
-	path = capture/r0capture
-	url = https://github.com/r0ysue/r0capture
-
-[submodule "ecapture"]
-	path = capture/ecapture
-	url = https://github.com/gojue/ecapture.git
 
 [submodule "frida_trump"]
 	path = Frida/frida_trump
@@ -17,10 +10,6 @@
 [submodule "lamda"]
 	path = lamda
 	url = https://github.com/rev1si0n/lamda.git
-
-[submodule "TweakMe"]
-	path = TweakMe
-	url = https://github.com/liaoguobao/TweakMe.git
 
 [submodule "unidbg_trump"]
 	path = unidbg_trump

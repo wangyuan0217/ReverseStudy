@@ -1,0 +1,24 @@
+
+
+openssl 工具下载-需设置环境变量
+https://slproweb.com/products/Win32OpenSSL.html
+
+
+
+查看证书hash
+
+openssl x509 -inform DER -subject_hash_old -in FiddlerRoot.cer
+
+
+转换证书格式
+
+openssl x509 -inform DER -in FiddlerRoot.cer -text > e5c3944b.0
+
+
+放到手机 /system/etc/security/cacerts/ 目录下，并设置644权限
+
+
+
+cer 转 pem
+
+

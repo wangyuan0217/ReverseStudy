@@ -318,7 +318,7 @@ class AxmlParser(object):
         raise Exception("Incorrect type id.")
 
 def main():
-    p = AxmlParser("D:\Project\Python\PyTest\AndroidManifest.xml")
+    p = AxmlParser("D:\ReverseStudy\Dump\Manifest解密\AndroidManifest.xml")
     axml = p.Deserialize()
     with open("AndroidManifest-Clean.xml","w",encoding="utf-8") as f:
         f.writelines(axml)
