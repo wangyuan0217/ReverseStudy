@@ -1,10 +1,7 @@
+# TRUMP 个人逆向资料收集-欢迎补充
 
 
-
-## TRUMP 个人逆向资料收集-欢迎补充
-
-
-> SU Xposed 
+## SU Xposed 
 
 - [KernelSU](https://github.com/tiann/KernelSU)
 
@@ -15,10 +12,14 @@
 - [Shamiko](https://github.com/LSPosed/LSPosed.github.io/releases)
 
 
-----
 
 
-> Frida 
+
+## Frida 
+
+- [frida](https://github.com/frida/frida)
+
+- [objection](https://github.com/sensepost/objection)
 
 - [Frida脚本收集](https://github.com/wangyuan0217/frida_trump)
 
@@ -26,24 +27,27 @@
 
 - [r0capture](https://github.com/r0ysue/r0capture) [r0tracer](https://github.com/r0ysue/r0tracer)
 
+- [jnitrace](https://github.com/chame1eon/jnitrace)
+
+- [frida-dexdump](https://github.com/hluwa/frida-dexdump)
+
+- [strongR-frida-android](https://github.com/CrackerCat/strongR-frida-android)
 
 
-> Web
+
+## Web
 
 - [JS逆向](Js/README.md)
 
 
-----
 
-> MiniProgram
+## MiniProgram
 
 - [UnpackMiniApp](MiniProgram/readme.md)
 
 
-----
 
-
-> Tools
+## Tools
 
 - [逆向常用工具集](Tools/README.md)
 
@@ -55,15 +59,16 @@
 
 - [unidbg](https://github.com/wangyuan0217/unidbg_trump)
 
+- [JADXecute](https://github.com/LaurieWired/JADXecute)
 
-----
+
 
 
 ####  [使用帮助](Usage.md) 
 
 
 
-### clone
+#### clone
 
 `git clone https://github.com/wangyuan0217/ReverseStudy`
 

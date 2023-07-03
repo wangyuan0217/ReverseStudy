@@ -1,4 +1,9 @@
 
+## pyenv-win
+
+- [安装教程](https://my.oschina.net/zhenggao/blog/5585534)
+
+
 
 
 ## r0capture
