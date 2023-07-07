@@ -17,20 +17,27 @@
 
 ## lamda
 
+* 安装
 adb shell
-
 su
-
 cd /data/local/tmp
-
 sh x86_64.sh
 
+或者直接magisk安装(带自启动)
 
-* 注意，设备IP 必须在参数第一位
+* 访问 
+ip:65000
+ip:65000/fs/
+
+* 抓包
 python -u startmitm.py 192.168.1.2
+或 startmitm.ext 192.168.1.2
 
-* 这里的 com.some.package 是应用的 ID
+只抓具体应用
 python -u startmitm.py 192.168.1.2:com.some.package
+
+改包
+python -u startmitm.py 192.168.1.2 -s a_http_modify.py
 
 
 
@@ -40,4 +47,12 @@ python -u startmitm.py 192.168.1.2:com.some.package
 过签 360 (so是指加固的壳的so，也就是app第一个加载的so)
 
 apktweak --embed --apk xxxx.apk --target assets/libjiagu.so
+
+
+
+## Pixel 手机相关
+
+* 解决时间同步 adb shell "settings put global ntp_server pool.ntp.org"
+
+
 
