@@ -18,25 +18,32 @@
 ## lamda
 
 * 安装
+  
 adb shell
+
 su
+
 cd /data/local/tmp
+
 sh x86_64.sh
 
 或者直接magisk安装(带自启动)
 
 * 访问 
+  
 ip:65000
+
 ip:65000/fs/
 
 * 抓包
+* 
 python -u startmitm.py 192.168.1.2
 或 startmitm.ext 192.168.1.2
 
 只抓具体应用
 python -u startmitm.py 192.168.1.2:com.some.package
 
-改包
+* 改包
 python -u startmitm.py 192.168.1.2 -s a_http_modify.py
 
 
