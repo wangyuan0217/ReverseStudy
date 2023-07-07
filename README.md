@@ -1,4 +1,4 @@
-# TRUMP 个人逆向资料收集-欢迎补充
+# TRUMP 个人逆向资料收集-欢迎补充   [使用帮助](Usage.md) 
 
 
 ## SU Xposed 
@@ -10,8 +10,6 @@
 - [LSPosed](https://github.com/LSPosed/LSPosed)
 
 - [Shamiko](https://github.com/LSPosed/LSPosed.github.io/releases)
-
-
 
 
 
@@ -61,10 +59,6 @@
 
 - [JADXecute](https://github.com/LaurieWired/JADXecute)
 
-
-
-
-####  [使用帮助](Usage.md) 
 
 
 
