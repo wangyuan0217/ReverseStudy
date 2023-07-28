@@ -39,6 +39,8 @@
   - [debuggable](#debuggable)
 
 
+<!-- dex2c + 函数分离 + np控制流混淆 + 360加固 -->
+
 ## pyenv-win
 
 ### 下载
@@ -52,6 +54,9 @@
 
 ### 基本命令
 ```bash
+# 设置代理
+# set HTTP_PROXY=127.0.0.1:7890
+# set HTTPS_PROXY=127.0.0.1:7890
 pyenv install -l
 pyenv install 3.9.9
 pyenv uninstall 3.5.2
@@ -158,44 +163,32 @@ pip install -U objection
 ### 使用
 ```bash
 objection -d -g package_name explore
-
 # 查看内存中加载的module
 memory list modules
-
 # 查看库的导出函数
 memory list exports libssl.so
-
 # 内存堆搜索实例
 android heap search instances 类名
-
 # 调用实例的方法
 android heap execute 实例ID 实例方法
-
 # 查看当前可用的activity或者service
 android hooking list activities/services
-
 # 直接启动activity或者服务
 android intent launch_activity/launch_service activity/服务
-
 # 列出内存中所有的类
 android hooking list classes
-
 # 在内存中所有已加载的类中搜索包含特定关键词的类
 android hooking search classes display
-
 # 内存中搜索指定类的所有方法 
 android hooking list class_methods 类名
-
 # 在内存中所有已加载的类的方法中搜索包含特定关键词的方法
 android hooking search methods display
-
 hook类的方法（hook类里的所有方法/具体某个方法）
 android hooking watch class 类名
 android hooking watch class 类名 --dump-args --dump-backtrace --dump-return
 android hooking watch class_method 方法名
 # 可以直接hook到所有重载
 android hooking watch class_method xxx.MainActivity.fun --dump-args --dump-backtrace --dump-return
-
 ```
 
 
@@ -256,12 +249,15 @@ ip:65000/fs/
 ```bash
 python -u startmitm.py 192.168.1.2
 或 
+startmitm.exe localhost
 startmitm.exe 192.168.1.2
 ```
 
 只抓具体应用
 ```bash
 python -u startmitm.py 192.168.1.2:com.some.package
+或
+startmitm.exe 192.168.1.2:com.xxx.xxx
 ```
 
 改包
@@ -272,9 +268,9 @@ python -u startmitm.py 192.168.1.2 -s a_http_modify.py
 
 ## TweakMe
 
-过签 360 (so是指加固的壳的so，也就是app第一个加载的so)
-
+过签 (so是指加固的壳的so，也就是app第一个加载的so)
 ```bash
+# 示例360
 apktweak --embed --apk xxxx.apk --target assets/libjiagu.so
 ```
 
@@ -295,7 +291,9 @@ adb shell settings put global captive_portal_mode 0
 ```
 
 
-## ADB
+## ADB  
+
+更多请参考 [CCommand](https://github.com/xbdcc/CCommand)
 
 ### 基本
 
@@ -326,7 +324,7 @@ stop;start; #一定要通过该方式重启
 ```
 
 
--  永久生效
+- 永久生效
 
 先在magisk中安装 https://github.com/Magisk-Modules-Repo/MagiskHidePropsConf/releases 然后重启手机；
 
