@@ -30,6 +30,9 @@
   - [访问](#访问)
   - [抓包](#抓包)
 - [TweakMe](#tweakme)
+  - [TwPatch](#twpatch)
+- [Shizuku](#shizuku)
+- [LsPatch](#lspatch)
 - [Pixel 手机相关](#pixel-手机相关)
   - [解决时间同步](#解决时间同步)
   - [网络感叹号](#网络感叹号)
@@ -273,6 +276,31 @@ python -u startmitm.py 192.168.1.2 -s a_http_modify.py
 # 示例360
 apktweak --embed --apk xxxx.apk --target assets/libjiagu.so
 ```
+
+### TwPatch
+基于TweakMe开发的对apk进行二次打包注入hook框架处理
+
+[TwPatch_v4.3]
+下载链接:https://wwp.lanzoup.com/iLXVI14p469a
+
+为防止被别人二改，软件内加入了登录激活码验证
+验证码：6UUcK7WnKx
+直接软件内注册登录即可
+
+
+## Shizuku
+
+Shizuku 可以帮助普通应用借助一个由 app_process 启动的 Java 进程直接以 adb 或 root 特权使用系统 API。
+
+https://github.com/RikkaApps/Shizuku
+
+https://shizuku.rikka.app/zh-hans/introduction/
+
+
+## LsPatch 
+LSPosed框架的免Root 实现, 通过在目标APK中插入dex等整合Xposed API
+https://github.com/LSPosed/LSPatch
+
 
 
 
