@@ -273,8 +273,15 @@ python -u startmitm.py 192.168.1.2 -s a_http_modify.py
 
 过签 (so是指加固的壳的so，也就是app第一个加载的so)
 ```bash
-# 示例360
-apktweak --embed --apk xxxx.apk --target assets/libjiagu.so
+# 一键内嵌打包命令（梆梆、爱加密、360）：
+apktweak.exe  --embed  --apk  xxx.apk  --target  libDexHelper.so
+apktweak.exe  --embed  --apk  xxx.apk  --target  assets/ijm_lib/armeabi/libexec.so
+apktweak.exe  --embed  --apk  xxx.apk  --target  assets/libjiagu.so
+
+# 指定abi
+apktweak  --apk  xxx.apk  --target  assets/libjiagu_a64.so  --abi arm64-v8a
+
+--embed 可选参数； 表示将tweak框架内嵌到apk中；
 ```
 
 ### TwPatch
