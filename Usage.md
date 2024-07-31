@@ -29,8 +29,7 @@
   - [安装](#安装-3)
   - [访问](#访问)
   - [抓包](#抓包)
-- [TweakMe](#tweakme)
-  - [TwPatch](#twpatch)
+- [ecapture](#ecapture)
 - [Shizuku](#shizuku)
 - [LsPatch](#lspatch)
 - [Pixel 手机相关](#pixel-手机相关)
@@ -38,8 +37,13 @@
   - [网络感叹号](#网络感叹号)
 - [ADB](#adb)
   - [基本](#基本)
-  - [查看Activity](#查看activity)
+  - [am](#am)
+  - [pm](#pm)
+  - [pull \& push](#pull--push)
+  - [logcat](#logcat)
   - [debuggable](#debuggable)
+- [Smali](#smali)
+- [Tips](#tips)
 
 
 <!-- dex2c + 函数分离 + np控制流混淆 + 360加固 -->
@@ -51,7 +55,7 @@
 
 ### 环境变量
 * PYENV, PYENV_HOME ,PYENV_ROOT
-变量值都是：D:\pyenv-win-master\pyenv-win\
+  变量值都是：D:\pyenv-win-master\pyenv-win\
 * path新增  %PYENV%\bin  和   %PYENV%\shims
 * 测试成功  pyenv --version
 
@@ -91,8 +95,8 @@ pip ...
 * Shamiko:隐藏root；https://github.com/LSPosed/LSPosed.github.io/releases
   勾选zygisk，并从magisk刷入重启；
   - whitelist 在/data/adb/shamiko下新建文件whitelist重启即可；全局生效；
-  - blacklist 默认；并结合 magisk-设置-配置排查列表 中配置完成对指定应用生效； 
-* 隐藏应用列表 https://github.com/Dr-TSNG/Hide-My-Applist/releases 
+  - blacklist 默认；并结合 magisk-设置-配置排查列表 中配置完成对指定应用生效；
+* 隐藏应用列表 https://github.com/Dr-TSNG/Hide-My-Applist/releases
   1. 在lsposed中勾选生效
   2. 模板管理 - 创建黑名单模块(要隐藏的app)
   3. 应用管理 - 选择app来隐藏对应的黑名单模板；
@@ -104,7 +108,7 @@ pip ...
 
 
 
-## Frida  
+## Frida
 
 ### 安装
 ```bash
@@ -118,12 +122,14 @@ pip install frida-tools==5.3.0
 adb shell getprop ro.product.cpu.abi
 
 # 根据系统架构在https://github.com/frida/frida/releases 下载对应的frida-server
+#需要root
 adb push frida-server /data/local/tmp/
 adb shell "chmod 755 /data/local/tmp/frida-server"
 ```
 
 ### 启动
 ```bash
+# root
 # ./frida-server &
 adb shell "/data/local/tmp/frida-server &"
 # 后续新开一个shell...
@@ -140,20 +146,20 @@ adb forward tcp:27043 tcp:27043
 frida --version 
 
 # 查看手机启动的进程
-frida-ps -U
+frida-ps -Uai
 ```
 
 ### 基本使用
 
 ```bash
-# Spawn模式 -f
-frida -U -f com.xx.messenger -l hook.js --no-pause 
+# Spawn(-f)
+frida -U -f com.xx.messenger -l hook.js
 
 # Attach模式
 frida -U com.android.chrome -l chrome.js 
 ```
 
-### [代码块收集](/Frida/frida-note.md) 
+### [代码块收集](/Frida/frida-note.md)
 
 
 ## Objection
@@ -165,33 +171,33 @@ pip install -U objection
 
 ### 使用
 ```bash
-objection -d -g package_name explore
-# 查看内存中加载的module
-memory list modules
-# 查看库的导出函数
-memory list exports libssl.so
-# 内存堆搜索实例
-android heap search instances 类名
-# 调用实例的方法
-android heap execute 实例ID 实例方法
-# 查看当前可用的activity或者service
-android hooking list activities/services
-# 直接启动activity或者服务
-android intent launch_activity/launch_service activity/服务
-# 列出内存中所有的类
-android hooking list classes
-# 在内存中所有已加载的类中搜索包含特定关键词的类
-android hooking search classes display
-# 内存中搜索指定类的所有方法 
-android hooking list class_methods 类名
-# 在内存中所有已加载的类的方法中搜索包含特定关键词的方法
-android hooking search methods display
-hook类的方法（hook类里的所有方法/具体某个方法）
-android hooking watch class 类名
-android hooking watch class 类名 --dump-args --dump-backtrace --dump-return
-android hooking watch class_method 方法名
-# 可以直接hook到所有重载
-android hooking watch class_method xxx.MainActivity.fun --dump-args --dump-backtrace --dump-return
+objection -g com.xxx explore
+objection -g com.xxx explore --startup-command "你要执行的oc命令"
+
+
+android hooking get current_activity
+#搜索类
+android hooking search classes asvid.github.io.fridaapp
+#搜索类的方法
+android hooking search methods asvid.github.io.fridaapp MainActivity
+#列出类的声明方法及其参数
+android hooking list class_methods asvid.github.io.fridaapp.MainActivity
+
+#hook 方法
+android hooking watch class_method asvid.github.io.fridaapp.MainActivity.sum --dump-args --dump-backtrace --dump-return
+
+#改变方法的返回值(只支持bool类型)
+android hooking set return_value 包.类.方法  true
+
+#sslpinning
+android sslpinning disable  #屏蔽SSL 校验, 使得ssl pinning失效
+
+
+memory list modules  # 查看内存中加载的库
+memory list exports libssl.so  #查看库的导出函数
+memory list exports libart.so --json /root/libart.json #将结果保存到json文件中
+memory search --string --offsets-only #搜索内存
+memory search "00 00 00 00 00 00 00"
 ```
 
 
@@ -230,7 +236,7 @@ jnitrace -l libxxxxxx.so com.xxxx.xxxx
 ## lamda
 
 ### 安装
-  
+
 ```bash
 adb push arm64-v8a.tar.gz-install.sh /data/local/tmp
 adb shell
@@ -242,7 +248,7 @@ sh x86_64.sh
 
 网络需设置为桥接模式
 
-### 访问 
+### 访问
 ```bash
 ip:65000
 ip:65000/fs/
@@ -269,30 +275,22 @@ python -u startmitm.py 192.168.1.2 -s a_http_modify.py
 ```
 
 
-## TweakMe
+## ecapture
 
-过签 (so是指加固的壳的so，也就是app第一个加载的so)
-```bash
-# 一键内嵌打包命令（梆梆、爱加密、360）：
-apktweak.exe  --embed  --apk  xxx.apk  --target  libDexHelper.so
-apktweak.exe  --embed  --apk  xxx.apk  --target  assets/ijm_lib/armeabi/libexec.so
-apktweak.exe  --embed  --apk  xxx.apk  --target  assets/libjiagu.so
+eCapture(旁观者): 基于eBPF技术实现TLS加密的明文捕获，无需CA证书。
+https://github.com/gojue/ecapture
 
-# 指定abi
-apktweak  --apk  xxx.apk  --target  assets/libjiagu_a64.so  --abi arm64-v8a
+[下载二进制包](https://github.com/gojue/ecapture/releases)直接使用（需要root)
 
---embed 可选参数； 表示将tweak框架内嵌到apk中；
 ```
-
-### TwPatch
-基于TweakMe开发的对apk进行二次打包注入hook框架处理
-
-[TwPatch_v4.3]
-下载链接:https://wwp.lanzoup.com/iLXVI14p469a
-
-为防止被别人二改，软件内加入了登录激活码验证
-验证码：6UUcK7WnKx
-直接软件内注册登录即可
+安装
+adb push ecapture /data/local/tmp/
+adb shell chmod 777 /data/local/tmp/ecapture
+启动
+adb shell: su
+cd /data/local/tmp/
+./ecapture tls
+```
 
 
 ## Shizuku
@@ -304,7 +302,7 @@ https://github.com/RikkaApps/Shizuku
 https://shizuku.rikka.app/zh-hans/introduction/
 
 
-## LsPatch 
+## LsPatch
 LSPosed框架的免Root 实现, 通过在目标APK中插入dex等整合Xposed API
 https://github.com/LSPosed/LSPatch
 
@@ -313,20 +311,25 @@ https://github.com/LSPosed/LSPatch
 
 ## Pixel 手机相关
 
-### 解决时间同步 
+### 解决时间同步
 ```bash
 adb shell "settings put global ntp_server pool.ntp.org"
 ```
 
-### 网络感叹号  
+### 网络感叹号
 ```bash
 adb shell settings put global captive_portal_server www.google.cn
 adb shell settings put global captive_portal_https_url https://www.google.cn/generate_204
 adb shell settings put global captive_portal_mode 0
+
+# 或者 adb shell
+settings put global captive_portal_http_url https://www.google.cn/generate_204
+settings put global captive_portal_https_url https://www.google.cn/generate_204
+settings put global ntp_server 1.hk.pool.ntp.org
 ```
 
 
-## ADB  
+## ADB
 
 更多请参考 [CCommand](https://github.com/xbdcc/CCommand)
 
@@ -335,19 +338,60 @@ adb shell settings put global captive_portal_mode 0
 ```bash
 adb install -r(覆盖安装) xx.apk
 
+#adb 查看当前activity
+adb shell dumpsys window | findstr mCurrentF
+
 ```
 
-### 查看Activity
+### am
+am命令是一个重要的调试工具，主要用于启动或停止服 务、发送广播、启动Activity等。在逆向过程中，往往在需要以 Debug模式启动App时会使用这个命令。 对应命令格式为adb shell am start-activity -D -N <包名>/<类 名>。
 
 ```bash
-adb shell dumpsys activity recents
-
-#查看包名及当前activity
-adb shell dumpsys window |grep mCurrentFocus
+adb shell am start-activity -D -N com.example.network/.MainActivity
 ```
 
+### pm
 
-### debuggable 
+```bash
+# 列出所 有安装的APK包名。
+adb shell pm list packages
+
+#adb 搜索手机上的包名 
+adb shell pm list packages | findstr com.xx
+#或者frida
+frida-ps -Uai | findstr 包名
+frida-ps -Uai | Select-String 包名/APP名
+#或者objection
+android hooking get current_activity
+```
+
+### pull & push
+
+```bash
+# 从手机中拉取信息到本地电脑上  本机路径为空则到当前文件夹下
+adb pull <手机路径>   <本机路径>  
+
+# 从本地电脑推送信息到手机上
+adb push <本机路径>  <手机路径>  
+```
+
+### logcat
+
+```bash
+# 根据关键词过滤
+adb logcat -e keyword
+
+# 根据包名过滤
+adb logcat *|find "com.kj.avde"
+
+# 根据Tag过滤
+adb logcat -s System.out
+
+# 存储日志到本地（需先创建好log.txt）
+adb logcat | findstr "com.kj.avd">D:\log.txt
+```
+
+### debuggable
 
 - 重启失效
 
@@ -373,4 +417,21 @@ props
 # 测试重启查看 getprop ro.debuggable
 ```
 
+
+
+## Smali
+
+基本类型和基本语法
+
+....
+
+
+
+## Tips
+
+- #### du -h * 查看此目录所有文件大小
+- #### frida 代码提示：npm install --save @types/frida-gum
+- #### grep -ril "MainActivity" .
+  查看此目录脱下来的dex哪个包含指定字符串,可以查看脱下来的壳哪个是正确的。
+- #### jadx -e xxx.apk 导出一个gradle项目
 
